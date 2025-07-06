@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+    <!-- Pixel-style font for the header -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Soft aesthetic font for sticky notes -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header-container">
+     <img src="{{ url_for('static', filename='flower.webp') }}" class="pixel-flower left">
+     <img src="{{ url_for('static', filename='flower2.png') }}" class="pixel-flower left">
+
+     <h1>My To-Do List</h1>
+     <img src="{{ url_for('static', filename='flower2.png') }}" class="pixel-flower right">
+     <img src="{{ url_for('static', filename='flower.webp') }}" class="pixel-flower right">
+    </div>
+
+    
+    <!-- Form to add a new sticky note -->
+    <form method="POST" action="{{ url_for('add_note') }}">
+        <input type="text" name="title" placeholder="Sticky note title" required>
+        <button type="submit">Create Note</button>
+    </form>
+
+
+    <!-- Display each sticky note -->
+    <div class="task-container">
+        {% for task in tasks %}
+        <div class="sticky-note" style="background-color: {{ task.color }}">
+
+            <!-- Pixel-style bar -->
+            <div class="note-header">
+                <span class="pixel-dot red"></span>
+                <span class="pixel-dot pink"></span>
+                <span class="pixel-dot babypink"></span>
+            </div>
+
+            <h3>{{ task.title }}</h3>
+
+            <!-- List of subtasks -->
+            <ul class="subtasks">
+                {% for item in task['items'] %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Form to add a subtask inside this sticky note -->
+            <form method="POST" action="{{ url_for('add_item', task_id=loop.index0) }}">
+                <input type="text" name="item" placeholder="Add a task..." required />
+                <button type="submit">+</button>
+            </form>
+
+            <!-- Color palette -->
+            <div class="palette">
+                <a href="{{ url_for('change_color', task_id=loop.index0, color='#E6E6FA') }}" style="background-color: #E6E6FA;"></a>
+                <a href="{{ url_for('change_color', task_id=loop.index0, color='#E0B0FF') }}" style="background-color: #E0B0FF;"></a>
+                <a href="{{ url_for('change_color', task_id=loop.index0, color='#DDA0DD') }}" style="background-color: #DDA0DD;"></a>
+                <a href="{{ url_for('change_color', task_id=loop.index0, color='#C9A0DC') }}" style="background-color: #C9A0DC;"></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
