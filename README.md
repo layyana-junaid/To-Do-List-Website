@@ -1,21 +1,15 @@
-## Pixel-Themed To-Do List Web App
+# 💜 Pixel-Themed To-Do List Web App
 ```bash
 🎯 What This Project Does
 Lets users create pixel-styled sticky notes to organize tasks.
-
 Each sticky note supports multiple subtasks.
-
 Users can change note colors using a pixel-inspired palette.
-
 Styled with playful retro aesthetics, including pixel fonts and flower icons.
 
 🛠️ Technologies Used
 HTML5 & CSS3
-
 Python (Flask)
-
 Google Fonts (Pixel & Retro styles)
-
 Custom pixel-art graphics
 ```
 
